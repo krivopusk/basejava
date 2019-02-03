@@ -51,6 +51,7 @@ public class ArrayStorage {
         return Arrays.copyOfRange(storage, 0, size());
     }
 
+
     int size() {
         return realSize;
     }
