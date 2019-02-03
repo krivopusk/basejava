@@ -8,7 +8,7 @@ public class ArrayStorage {
     private int realSize = 0;
 
     void clear() {
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < realSize; i++) {
             storage[i] = null;
         }
         realSize = 0;
@@ -19,12 +19,12 @@ public class ArrayStorage {
             System.out.println("ArrayStorage is full. You can not add a new resume");
             return;
         }
-        storage[size()] = r;
+        storage[realSize] = r;
         realSize++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < realSize; i++) {
             if ((storage[i].uuid).equals(uuid)) {
                 return storage[i];
             }
@@ -33,22 +33,22 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < realSize; i++) {
             if (uuid.equals(storage[i].uuid)) {
                 //the element at the end of the array replaces the element which we want to remove
-                storage[i] = storage[size() - 1];
-                storage[size() - 1] = null;
+                storage[i] = storage[realSize - 1];
+                storage[realSize - 1] = null;
+                realSize--;
                 break;
             }
         }
-        realSize--;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size());
+        return Arrays.copyOfRange(storage, 0, realSize);
     }
 
     int size() {
