@@ -7,20 +7,16 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
-    private int realSize = 0;
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void clear() {
-        for (int i = 0; i < realSize; i++) {
-            storage[i] = null;
-        }
+        Arrays.fill(storage, 0, realSize, null);
         realSize = 0;
     }
 
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
-        if (index != -1) {
+        if (index == -1) {
             System.out.println("Resume {" + r.getUuid() + "} does present in a storage and can not be updated");
         } else {
             storage[index] = r;
@@ -31,22 +27,13 @@ public class ArrayStorage {
     public void save(Resume r) {
         if (getIndex(r.getUuid()) != -1) {
             System.out.println("Resume {" + r.getUuid() + "} does present in a storage and can not be added");
-        } else if (realSize == storage.length) {
+        } else if (realSize == STORAGE_LIMIT) {
             System.out.println("ArrayStorage overflow");
         } else {
             storage[realSize] = r;
             realSize++;
             System.out.println("Resume {" + r.getUuid() + "} is saved");
         }
-    }
-
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index == -1) {
-            System.out.println("Resume with {" + uuid + "} does not present in a storage");
-            return null;
-        }
-        return storage[index];
     }
 
     /**
@@ -68,13 +55,9 @@ public class ArrayStorage {
         }
     }
 
-    public int size() {
-        return realSize;
-    }
-
 
     //TODO check if resume present and return it's index
-    private int getIndex(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < realSize; i++) {
             if (uuid == storage[i].getUuid()) {
                 return i;
