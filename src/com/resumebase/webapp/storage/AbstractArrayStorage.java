@@ -35,7 +35,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void save(Resume r) {
         int index = getIndex(r.getUuid());
-        if (index > 0) {
+        if (index >= 0) {
             throw new ExistStorageException(r.getUuid());
             //System.out.println("Resume {" + r.getUuid() + "} does present in a storage and can not be added");
         } else if (realSize == STORAGE_LIMIT) {
