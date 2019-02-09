@@ -2,8 +2,6 @@ package com.resumebase.webapp.storage;
 
 import com.resumebase.webapp.model.Resume;
 
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
