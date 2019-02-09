@@ -9,16 +9,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/*
-логика реализации теста на переполнение массива (StorageException):
-        заполняем массив, но не вызываем у него переполнение
-        если исключение вылетит раньше, чем массив будет заполнен,
-        то тест должен провалиться (см. Assert.fail())
-        если исключение вылетает, когда пытаемся добавить в полностью заполненный массив еще одно резюме
-        - тест пройден
-        добавьте конструктор в AbstractArrayStorageTest, который инициализирует Storage storage,
-        а в наследниках добавьте конструкторы, которые будут вызывать super() с нужным хранилищем*/
-
 public abstract class AbstractArrayStorageTest {
     private Storage storage;
     private static final String UUID_1 = "uuid1";
@@ -92,8 +82,7 @@ public abstract class AbstractArrayStorageTest {
             for (int i = 3; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
                 storage.save(new Resume());
             }
-        }
-        catch(StorageException e ) {
+        } catch (StorageException e) {
             fail(e.getMessage());
         }
         storage.save(new Resume());
