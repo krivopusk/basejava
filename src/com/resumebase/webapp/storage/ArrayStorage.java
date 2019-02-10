@@ -18,7 +18,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     //TODO check if resume present and return it's index
-    protected int getIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < realSize; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;

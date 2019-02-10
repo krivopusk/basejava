@@ -1,85 +1,60 @@
 package com.resumebase.webapp.storage;
 
-import com.resumebase.webapp.exception.ExistStorageException;
-import com.resumebase.webapp.exception.NotExistStorageException;
-import com.resumebase.webapp.exception.StorageException;
 import com.resumebase.webapp.model.Resume;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-
-    public List<Resume> storage = new ArrayList<>();
-
-    public void clear() {
-       storage.clear();
-    }
+    private List<Resume> list = new ArrayList<>();
 
     @Override
-    protected Object getSearchKey(String uuid) {
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
         return null;
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return false;
+        return searchKey != null;
     }
 
-    public void doUpdate(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(r.getUuid());
-            //System.out.println("Resume {" + r.getUuid() + "} does not present in a storage and can not be updated");
-        } else {
-            storage.add(index, r);
-            System.out.println("Resume {" + r.getUuid() + "} is updated");
-        }
+    @Override
+    protected void doUpdate(Resume r, Object searchKey) {
+        list.set((Integer) searchKey, r);
     }
 
-    public void doSave(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(r.getUuid());
-            //System.out.println("Resume {" + r.getUuid() + "} does present in a storage and can not be added");
-        } else {
-            storage.add(r);
-            System.out.println("Resume {" + r.getUuid() + "} is saved");
-        }
+    @Override
+    protected void doSave(Resume r, Object searchKey) {
+        list.add(r);
     }
 
-    public void doDelete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-            //System.out.println("Resume with {" + uuid + "} does not present in a storage");
-        } else {
-            storage.remove(index);
-            System.out.println("Resume with {" + uuid + "} is deleted");
-        }
+    @Override
+    protected Resume doGet(Object searchKey) {
+        return list.get((Integer) searchKey);
     }
 
-    public List<Resume> getAll() {
-        return storage;
+    @Override
+    protected void doDelete(Object searchKey) {
+        list.remove(((Integer) searchKey).intValue());
     }
 
-    public Resume doGet(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-            //System.out.println("Resume with {" + uuid + "} does not present in a storage");
-            //return null;
-        }
-        return storage.get(index);
+    @Override
+    public void clear() {
+        list.clear();
     }
 
-    protected int getIndex(String uuid) {
-        for (int i = 0; i < storage.size(); i++) {
-            if (uuid.equals(storage.get(i).getUuid())) {
-                return i;
-            }
-        }
-        return -1;
+    @Override
+    public Resume[] getAll() {
+        return list.toArray(new Resume[list.size()]);
+    }
+
+    @Override
+    public int size() {
+        return list.size();
     }
 }
