@@ -2,6 +2,8 @@ package com.resumebase.webapp.storage;
 
 import com.resumebase.webapp.model.Resume;
 
+import java.util.List;
+
 //TODO refactor implement getAllSorted
 public interface Storage {
 
@@ -16,8 +18,9 @@ public interface Storage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll();
-// List<Resume> getAllSorted();
+    List<Resume> getAllSorted();
+
+// Resume[] getAll();
 
     void delete(String uuid);
 
