@@ -2,59 +2,54 @@ package com.resumebase.webapp.storage;
 
 import com.resumebase.webapp.model.Resume;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-
-//TODO implements, create new MapResumeStorage with another search key type (not uuid)
 public class MapUuidStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
     protected String getSearchKey(String uuid) {
-        return null;
+        return uuid;
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
-        return false;
+    protected boolean isExist(Object uuid) {
+        return map.containsKey((String) uuid);
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-
+    protected void doUpdate(Resume r, Object uuid) {
+        map.put((String) uuid, r);
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
-
+    protected void doSave(Resume r, Object uuid) {
+        map.put((String) uuid, r);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-
+    protected void doDelete(Object uuid) {
+        map.remove((String) uuid);
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
-        return null;
+    protected Resume doGet(Object uuid) {
+        return map.get((String) uuid);
     }
 
 
     @Override
     public void clear() {
-
+        map.clear();
     }
 
     @Override
     public List<Resume> doCopyAll() {
-        return Collections.emptyList();
+        return new ArrayList<>(map.values());
     }
 
     @Override
     public int size() {
-        return 0;
+        return map.size();
     }
 }
