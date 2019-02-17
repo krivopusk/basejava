@@ -32,5 +32,6 @@ public class MainDate {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YY/MM/dd");
         System.out.println(dtf.format(ldt));
+
     }
 }
