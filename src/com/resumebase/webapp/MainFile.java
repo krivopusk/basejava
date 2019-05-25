@@ -1,12 +1,10 @@
 package com.resumebase.webapp;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class MainFile {
     public static void main(String[] args) {
-        String filePath = ".\\.gitignore";
+/*        String filePath = ".\\.gitignore";
         File file = new File(filePath);
         try {
             System.out.println(file.getCanonicalPath());
@@ -24,8 +22,33 @@ public class MainFile {
             System.out.println(fis.read());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }*/
 
+        //recursive cycle for directory basejava
+        String root = ".\\";
+        File f = new File(root);
+        if (!f.exists()) {
+            System.out.println("\nNot found: " + root);
+        }
 
+        if (!f.isDirectory()) {
+            System.out.println(
+                    "\nNot directory: " + root);
+        }
+        list(root);
+
+    }
+
+    static void list(String dir) {
+        File mainDir = new File(dir);
+        String[] dirs = mainDir.list();
+
+        for (int i = 0; i < dirs.length; i++) {
+            File f = new File(dir + File.separator + dirs[i]);
+            if (f.isFile())
+                System.out.println(dir + File.separator + dirs[i]);
+            else
+                list(dir + File.separator + dirs[i]);
         }
     }
 }
