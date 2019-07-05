@@ -1,9 +1,12 @@
 package com.resumebase.webapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class OrganisationSection extends Section {
+public class OrganisationSection extends Section implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final List<Organisation> organisations;
 
     public OrganisationSection(List<Organisation> organisations) {

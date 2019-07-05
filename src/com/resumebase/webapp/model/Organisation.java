@@ -1,5 +1,6 @@
 package com.resumebase.webapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ import java.util.Objects;
 import static com.resumebase.webapp.util.DateUtil.NOW;
 import static com.resumebase.webapp.util.DateUtil.of;
 
-public class Organisation {
+public class Organisation implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final Link homePage;
     private List<Position> positions = new ArrayList<>();
@@ -43,7 +45,9 @@ public class Organisation {
         return "Organisation{" + homePage + "," + positions + "}";
     }
 
-    public static class Position {
+    public static class Position implements Serializable {
+
+        private static final long serialVersionUID = 1L;
 
         private final LocalDate startDate;
         private final LocalDate endDate;

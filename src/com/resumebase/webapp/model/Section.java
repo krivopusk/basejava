@@ -1,4 +1,6 @@
 package com.resumebase.webapp.model;
 
-public class Section {
+import java.io.Serializable;
+
+public class Section implements Serializable {
 }
