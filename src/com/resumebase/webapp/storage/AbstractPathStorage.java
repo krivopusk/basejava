@@ -24,81 +24,89 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + " is not directory");
 
+        }
     }
 
     @Override
     protected Path getSearchKey(String uuid) {
-        return new Path(directory, uuid);
+        //return new Path(directory, uuid);
+        return null;
     }
 
     @Override
     protected boolean isExist(Path Path) {
-        return Path.exists();
+        //  return Path.exists();
+        return false;
     }
 
     @Override
     protected void doUpdate(Resume r, Path Path) {
-        try {
-            doWrite(r, new BufferedOutputStream(new PathOutputStream(Path)));
-        } catch (IOException e) {
-                throw new StorageException("Path write error", r.getUuid(), e);
-            }
-        }
+//        try {
+//            doWrite(r, new BufferedOutputStream(new FileOutputStream(Path)));
+//        } catch (IOException e) {
+//                throw new StorageException("Path write error", r.getUuid(), e);
+//            }
+    }
 
     @Override
     protected void doSave(Resume r, Path Path) {
-        try {
-            Path.createNewPath();
-        } catch (IOException e) {
-            throw new StorageException("Couldn't create Path " + Path.getAbsolutePath(), Path.getName(), e);
-        }
+//        try {
+//            Path.createNewPath();
+//        } catch (IOException e) {
+//            throw new StorageException("Couldn't create Path " + Path.getAbsolutePath(), Path.getName(), e);
+//        }
     }
 
     @Override
     protected void doDelete(Path Path) {
-        if (!Path.delete()) {
-            throw new StorageException("Path delete error ", Path.getName());
-        }
+//        if (!Path.delete()) {
+//            throw new StorageException("Path delete error ", Path.getName());
+        //    }
     }
 
     @Override
     protected Resume doGet(Path Path) {
-        try {
-            return doRead(new BufferedInputStream(new PathInputStream(Path)));
-        } catch (IOException e) {
-            throw new StorageException("Path read error", Path.getName(), e);
-        }
+//        try {
+//            return doRead(new BufferedInputStream(new PathInputStream(Path)));
+//        } catch (IOException e) {
+//            throw new StorageException("Path read error", Path.getName(), e);
+//        }
+        return null;
     }
 
 
     @Override
     protected List<Resume> doCopyAll() {
-        Path[] Paths = directory.listPaths();
-        if (Paths == null) {
-            throw new StorageException("Directory read error", null);
-        }
-        List<Resume> list = new ArrayList<>(Paths.length);
-        for (Path Path : Paths) {
-            list.add(doGet(Path));
-        }
-        return list;
+//        Path[] Paths = directory.listFiles();
+//        if (Paths == null) {
+//            throw new StorageException("Directory read error", null);
+//        }
+//        List<Resume> list = new ArrayList<>(Paths.length);
+//        for (Path Path : Paths) {
+//            list.add(doGet(Path));
+//        }
+//        return list;
+        return new ArrayList<>();
     }
 
     @Override
     public void clear() {
-            try {
-                Files.list(directory).forEach(this::doDelete);
-            } catch (IOException e) {
-                throw new StorageException("Directory read error", null);
-            }
+        try {
+            Files.list(directory).forEach(this::doDelete);
+        } catch (IOException e) {
+            throw new StorageException("Directory read error", null);
         }
+    }
 
     @Override
     public int size() {
-        String[] list = directory.list();
-        if (list == null) {
-            throw new StorageException("Directory read error", null);
-        }
-        return list.length;
+//        String[] list = directory.list();
+//        if (list == null) {
+//            throw new StorageException("Directory read error", null);
+//        }
+//        return list.length;
+
+        return 0;
     }
 }
+
