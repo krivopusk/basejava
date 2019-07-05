@@ -18,16 +18,18 @@ public class MainDate {
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-        System.out.println(cal.getTime());
+        System.out.println(cal.getTime()); //даже после сета все равно в текущей тайм зоне
 
         LocalDate ld = LocalDate.now();
         LocalTime lt = LocalTime.now();
         LocalDateTime ldt = LocalDateTime.of(ld, lt);
+        LocalDateTime ldt2 = LocalDateTime.now();
         System.out.println(ld); //Date
         System.out.println(lt); //Time
         System.out.println(ldt);
+        System.out.println(ldt2);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("YY/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-dd");
         System.out.println(sdf.format(date));
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YY/MM/dd");
