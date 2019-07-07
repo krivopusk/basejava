@@ -7,7 +7,10 @@ import java.util.Objects;
 public class OrganisationSection extends Section implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final List<Organisation> organisations;
+    private List<Organisation> organisations;
+
+    public OrganisationSection() {
+    }
 
     public OrganisationSection(List<Organisation> organisations) {
         Objects.requireNonNull(organisations, "organisations must not be null");
