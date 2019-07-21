@@ -16,11 +16,13 @@ public class TextSection extends Section implements Serializable {
         this.content = content;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     @Override
     public String toString() {
-        return "TextSection{" +
-                "content='" + content + '\'' +
-                '}';
+        return content;
     }
 
     @Override
@@ -30,11 +32,13 @@ public class TextSection extends Section implements Serializable {
 
         TextSection that = (TextSection) o;
 
-        return content != null ? content.equals(that.content) : that.content == null;
+        return content.equals(that.content);
+
     }
 
     @Override
     public int hashCode() {
-        return content != null ? content.hashCode() : 0;
+        return content.hashCode();
     }
 }
+

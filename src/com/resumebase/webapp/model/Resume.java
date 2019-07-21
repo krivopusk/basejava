@@ -20,19 +20,8 @@ public class Resume implements Comparable<Resume>, Serializable {
     // Unique identifier
     private String uuid;
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public Map<ContactType, String> getContacts() {
-        return contacts;
-    }
-
-    public Map<SectionType, Section> getSections() {
-        return sections;
-    }
-
     private String fullName;
+
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
@@ -54,6 +43,18 @@ public class Resume implements Comparable<Resume>, Serializable {
         return uuid;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
+    }
+
     public String getContact(ContactType type) {
         return contacts.get(type);
     }
@@ -66,7 +67,7 @@ public class Resume implements Comparable<Resume>, Serializable {
         contacts.put(type, value);
     }
 
-    public void addSection(SectionType type, Section section, Organisation organization12) {
+    public void addSection(SectionType type, Section section) {
         sections.put(type, section);
     }
 
@@ -85,10 +86,6 @@ public class Resume implements Comparable<Resume>, Serializable {
     public int hashCode() {
         return Objects.hash(uuid, fullName, contacts, sections);
     }
-
-    //public void setUuid(String uuid) {
-    //  this.uuid = uuid;
-    //}
 
     @Override
     public String toString() {

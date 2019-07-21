@@ -1,6 +1,7 @@
 package com.resumebase.webapp.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,8 +13,12 @@ public class ListSection extends Section implements Serializable {
     public ListSection() {
     }
 
+    public ListSection(String... items) {
+        this(Arrays.asList(items));
+    }
+
     public ListSection(List<String> items) {
-        Objects.requireNonNull(items, "list items must not be null");
+        Objects.requireNonNull(items, "items must not be null");
         this.items = items;
     }
 
@@ -23,9 +28,7 @@ public class ListSection extends Section implements Serializable {
 
     @Override
     public String toString() {
-        return "ListSection{" +
-                "items=" + items +
-                '}';
+        return items.toString();
     }
 
     @Override
@@ -36,6 +39,7 @@ public class ListSection extends Section implements Serializable {
         ListSection that = (ListSection) o;
 
         return items.equals(that.items);
+
     }
 
     @Override

@@ -1,29 +1,28 @@
 package com.resumebase.webapp.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class OrganisationSection extends Section implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private List<Organisation> organisations;
+    private List<Organisation> Organisations;
 
-    public OrganisationSection() {
+    public OrganisationSection() {}
+
+    public OrganisationSection(Organisation... Organisations) {
+        this(Arrays.asList(Organisations));
     }
 
-    public OrganisationSection(List<Organisation> organisations) {
-        Objects.requireNonNull(organisations, "organisations must not be null");
-        this.organisations = organisations;
+    public OrganisationSection(List<Organisation> Organisations) {
+        Objects.requireNonNull(Organisations, "Organisations must not be null");
+        this.Organisations = Organisations;
     }
 
     public List<Organisation> getOrganisations() {
-        return organisations;
-    }
-
-    @Override
-    public String toString() {
-        return organisations.toString();
+        return Organisations;
     }
 
     @Override
@@ -33,11 +32,17 @@ public class OrganisationSection extends Section implements Serializable {
 
         OrganisationSection that = (OrganisationSection) o;
 
-        return organisations.equals(that.organisations);
+        return Organisations.equals(that.Organisations);
+
     }
 
     @Override
     public int hashCode() {
-        return organisations.hashCode();
+        return Organisations.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return Organisations.toString();
     }
 }
