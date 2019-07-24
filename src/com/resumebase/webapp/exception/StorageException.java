@@ -1,6 +1,7 @@
 package com.resumebase.webapp.exception;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class StorageException extends RuntimeException {
 
@@ -22,6 +23,10 @@ public class StorageException extends RuntimeException {
 
     public StorageException(String message) {
         this(message, null, null);
+    }
+
+    public StorageException(Exception e) {
+        this(e.getMessage(), e);
     }
 
     public String getUuid() {
