@@ -1,5 +1,6 @@
 package com.resumebase.webapp.storage;
 
+import com.resumebase.webapp.Config;
 import com.resumebase.webapp.exception.ExistStorageException;
 import com.resumebase.webapp.exception.NotExistStorageException;
 import com.resumebase.webapp.model.*;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
 
-    protected static final File STORAGE_DIR = new File("C:\\Javaprojects\\basejava\\storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected Storage storage;
 
